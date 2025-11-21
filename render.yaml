@@ -4,7 +4,7 @@ services:
     env: python
     plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn run:app
+    startCommand: gunicorn run:app --workers 1 --worker-class sync --max-requests 1000 --max-requests-jitter 50 --timeout 30
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
@@ -12,3 +12,5 @@ services:
         value: production
       - key: FLASK_APP
         value: run.py
+      - key: PORT
+        value: 10000
