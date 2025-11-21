@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Profile - Flask Profiles{% endblock %}
+
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card border-0 shadow-sm" style="border-radius: 12px;">
+        <div class="card-body p-4">
+          <h1 style="margin-bottom: 2rem;">
+            <i class="bi bi-pencil-square"></i> Update Profile
+          </h1>
+
+          <form method="post" novalidate>
+            {{ form.hidden_tag() }}
+
+            <div class="mb-3">
+              {{ form.fullname.label(class_='form-label') }}
+              {% if form.fullname.errors %}
+                {{ form.fullname(class_='form-control is-invalid') }}
+              {% else %}
+                {{ form.fullname(class_='form-control') }}
+              {% endif %}
+              {% for err in form.fullname.errors %}
+                <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle"></i> {{ err }}</div>
+              {% endfor %}
+            </div>
+
+            <div class="mb-3">
+              {{ form.email.label(class_='form-label') }}
+              {% if form.email.errors %}
+                {{ form.email(class_='form-control is-invalid') }}
+              {% else %}
+                {{ form.email(class_='form-control') }}
+              {% endif %}
+              {% for err in form.email.errors %}
+                <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle"></i> {{ err }}</div>
+              {% endfor %}
+            </div>
+
+            <div class="mb-3">
+              {{ form.age.label(class_='form-label') }}
+              {% if form.age.errors %}
+                {{ form.age(class_='form-control is-invalid', type='number') }}
+              {% else %}
+                {{ form.age(class_='form-control', type='number') }}
+              {% endif %}
+              {% for err in form.age.errors %}
+                <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle"></i> {{ err }}</div>
+              {% endfor %}
+            </div>
+
+            <div class="mb-4">
+              {{ form.bio.label(class_='form-label') }}
+              {% if form.bio.errors %}
+                {{ form.bio(class_='form-control is-invalid', rows=4) }}
+              {% else %}
+                {{ form.bio(class_='form-control', rows=4) }}
+              {% endif %}
+              {% for err in form.bio.errors %}
+                <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle"></i> {{ err }}</div>
+              {% endfor %}
+            </div>
+
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-primary flex-grow-1">
+                <i class="bi bi-check-circle"></i> Update
+              </button>
+              <a href="{{ url_for('main.index') }}" class="btn btn-secondary">
+                <i class="bi bi-x-circle"></i> Cancel
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

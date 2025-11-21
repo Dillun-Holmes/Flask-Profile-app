@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}Register Profile - Flask Profiles{% endblock %}
+
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card border-0 shadow-sm" style="border-radius: 12px;">
+        <div class="card-body p-4">
+          <h1 style="margin-bottom: 2rem;">
+            <i class="bi bi-person-plus-fill"></i> Create Profile
+          </h1>
+
+          <form method="post" novalidate>
+            {{ form.hidden_tag() }}
+
+            <div class="mb-3">
+              {{ form.fullname.label(class_='form-label') }}
+              {% if form.fullname.errors %}
+                {{ form.fullname(class_='form-control is-invalid') }}
+              {% else %}
+                {{ form.fullname(class_='form-control', placeholder='Enter your full name') }}
+              {% endif %}
+              {% for err in form.fullname.errors %}
+                <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle"></i> {{ err }}</div>
+              {% endfor %}
+            </div>
+
+            <div class="mb-3">
+              {{ form.email.label(class_='form-label') }}
+              {% if form.email.errors %}
+                {{ form.email(class_='form-control is-invalid', placeholder='your@email.com') }}
+              {% else %}
+                {{ form.email(class_='form-control', placeholder='your@email.com') }}
+              {% endif %}
+              {% for err in form.email.errors %}
+                <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle"></i> {{ err }}</div>
+              {% endfor %}
+            </div>
+
+            <div class="mb-3">
+              {{ form.age.label(class_='form-label') }}
+              {% if form.age.errors %}
+                {{ form.age(class_='form-control is-invalid', placeholder='10–120', type='number') }}
+              {% else %}
+                {{ form.age(class_='form-control', placeholder='10–120 (optional)', type='number') }}
+              {% endif %}
+              {% for err in form.age.errors %}
+                <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle"></i> {{ err }}</div>
+              {% endfor %}
+            </div>
+
+            <div class="mb-4">
+              {{ form.bio.label(class_='form-label') }}
+              {% if form.bio.errors %}
+                {{ form.bio(class_='form-control is-invalid', rows=4, placeholder='Tell us about yourself...') }}
+              {% else %}
+                {{ form.bio(class_='form-control', rows=4, placeholder='Tell us about yourself... (optional)') }}
+              {% endif %}
+              {% for err in form.bio.errors %}
+                <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle"></i> {{ err }}</div>
+              {% endfor %}
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">
+              <i class="bi bi-check-circle"></i> Register
+            </button>
+          </form>
+
+          <p class="text-center mt-3 text-muted">
+            <a href="{{ url_for('main.index') }}">Back to profiles</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
