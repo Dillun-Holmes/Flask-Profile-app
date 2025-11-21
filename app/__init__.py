@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
@@ -16,10 +17,12 @@ def create_app(test_config=None):
     """
     app = Flask(__name__, instance_relative_config=False)
 
-    # Default configuration
+    # Default configuration with environment support
     app.config.from_mapping(
-        SECRET_KEY="devkey",
-        SQLALCHEMY_DATABASE_URI="sqlite:///profiles.db",
+        SECRET_KEY=os.environ.get("SECRET_KEY", "devkey"),
+        SQLALCHEMY_DATABASE_URI=os.environ.get(
+            "DATABASE_URL", "sqlite:///profiles.db"
+        ),
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
     )
 
